@@ -131,8 +131,8 @@ export function evalGoodCards(gameState: GameState, betCallBack: (bet: number) =
                 return currentBet + gameState.minimum_raise;
             }
         } else if (
-          handStrength === 80 && currentBet < 101
-          || handStrength > 0 && handStrength < 80 && currentBet < 51
+          (handStrength === 80 && currentBet < 101)
+          || (handStrength > 0 && handStrength < 80 && currentBet < 51)
         ) {
             return currentBet;
         } else {
