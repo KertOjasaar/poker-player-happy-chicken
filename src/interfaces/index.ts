@@ -11,7 +11,7 @@ export interface GameState {
   orbits: number;
   in_action: number;
   players: Player[];
-  community_cards: CommunityCard[];
+  community_cards?: CommunityCard[];
 }
 
 export interface Player {

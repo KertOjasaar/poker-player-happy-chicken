@@ -1,7 +1,7 @@
 import express from 'express';
 import { Player } from './Player';
 
-const VERSION = "v0.1 - Don't fold always ever player";
+const VERSION = "v0.2";
 
 const app = express();
 const player = new Player();
