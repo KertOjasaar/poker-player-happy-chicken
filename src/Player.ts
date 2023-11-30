@@ -8,12 +8,16 @@ export class Player {
     try {
       console.log('GameState', gameState);
       const us = gameState.players.find((player) => player.name === TEAM_NAME);
-      const handStrength = evaluateHand(us!.hole_cards, gameState.community_cards);
-      console.log('betRequest evaluation:', {
-        us,
-        communityCards: gameState.community_cards,
-        handStrength,
-      });
+      if (us) {
+        const handStrength = evaluateHand(us.hole_cards, gameState.community_cards);
+        console.log('betRequest evaluation:', {
+          ourCards: us?.hole_cards?.map(({rank, suit}) => `${rank}${suit}`),
+          communityCards: gameState.community_cards?.map(({rank, suit}) => `${rank}${suit}`),
+          handStrength,
+        });
+      } else {
+        console.warn('Our cards don\'t exist');
+      }
     } catch (error) {
       console.error('betRequest error', error);
     }

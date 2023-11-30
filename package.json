@@ -16,6 +16,7 @@
     },
     "devDependencies": {
         "@types/express": "*",
+        "jest": "29.7.0",
         "typescript": "*"
     }
 }
