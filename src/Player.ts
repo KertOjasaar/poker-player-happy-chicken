@@ -55,7 +55,9 @@ export class Player {
   public evalGoodCards(gameState: GameState, betCallBack: (bet: number) => void, handStrength: number): number {
     const currentBet =  gameState.current_buy_in - gameState.players[gameState.in_action].bet;
     const ourBet = Math.round((this.us?.stack || 1000) * handStrength / 1000);
-    if (ourBet > currentBet) {
+      this.logGameState(gameState);
+
+      if (ourBet > currentBet) {
       console.log('postflop hand strength:', {
         currentBuyIn: gameState.current_buy_in,
         playerBet: gameState.players[gameState.in_action].bet,
@@ -68,7 +70,15 @@ export class Player {
     return currentBet;
   }
 
-  public showdown(gameState: GameState): void {
+    private logGameState(gameState: GameState) {
+        try {
+            console.log(JSON.stringify(gameState));
+        } catch (e) {
+
+        }
+    }
+
+    public showdown(gameState: GameState): void {
 
   }
 }
