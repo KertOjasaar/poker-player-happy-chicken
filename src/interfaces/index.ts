@@ -26,6 +26,13 @@ export interface Player {
 
 export interface Card {
   rank: string;
-  suit: string;
+  suit: Suit;
+}
+
+export enum Suit {
+  DIAMONDS = 'diamonds',
+  HEARTS = 'hearts',
+  SPADES = 'spades',
+  CLUBS = 'clubs',
 }
 
