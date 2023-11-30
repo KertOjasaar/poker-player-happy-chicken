@@ -17,7 +17,7 @@ export class Player {
         } else {
           handStrength = evaluateHand(this.us.hole_cards, gameState.community_cards);
         }
-        betCallback(handStrength > 0 ? this.evalGoodCards(gameState, betCallback, handStrength) : gameState.small_blind * 2);
+        betCallback(handStrength > 0 ? this.evalGoodCards(gameState, betCallback, handStrength) : 0);
         return;
       } else {
         console.warn('Our cards don\'t exist');
@@ -38,6 +38,12 @@ export class Player {
     const currentBet =  gameState.current_buy_in - gameState.players[gameState.in_action].bet;
 
     if (handStrength >= 80) {
+      console.log('preflop hand strength:', {
+        currentBuyIn: gameState.current_buy_in,
+        playerBet: gameState.players[gameState.in_action].bet,
+        minRaise: gameState.minimum_raise,
+        ourBet: gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise,
+      });
       return gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
     }
     if (handStrength > 0 && currentBet < (this.us?.stack || 1000) / 100) {
@@ -50,6 +56,12 @@ export class Player {
     const currentBet =  gameState.current_buy_in - gameState.players[gameState.in_action].bet;
     const ourBet = Math.round((this.us?.stack || 1000) * handStrength / 1000);
     if (ourBet > currentBet) {
+      console.log('postflop hand strength:', {
+        currentBuyIn: gameState.current_buy_in,
+        playerBet: gameState.players[gameState.in_action].bet,
+        minRaise: gameState.minimum_raise,
+        ourBet: gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise,
+      });
       // min raise
       return gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
     }
