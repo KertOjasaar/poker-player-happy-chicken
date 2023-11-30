@@ -39,16 +39,23 @@ export default function evaluateHand(holeCards: Card[] = [], communityCards: Car
 }
 
 function getHandStrength(rankCount: RankCount[]): HandStrength {
-    if (rankCount.filter(x => x.count == 4)) {
+    function countExistsInRankCount(number: number) {
+        return rankCount.filter(x => x.count == number).length > 0;
+    }
+
+    if (countExistsInRankCount(4)) {
         return HandStrength.FOUR_OR_A_KIND;
     }
-    if (rankCount.filter(x => x.count == 3) && rankCount.filter(x => x.count == 2)) {
+    if (countExistsInRankCount(3) && countExistsInRankCount(2)) {
         return HandStrength.FULL_HOUSE;
     }
-    if (rankCount.filter(x => x.count == 2).length > 2) {
+    if (countExistsInRankCount(3)) {
+        return HandStrength.THREE_OF_A_KIND;
+    }
+    if (rankCount.filter(x => x.count == 2).length >= 2) {
         return HandStrength.TWO_PAIRS;
     }
-    if (rankCount.filter(x => x.count == 2).length > 1) {
+    if (countExistsInRankCount(2)) {
         return HandStrength.PAIR;
     }
     return HandStrength.HIGH_CARD;
