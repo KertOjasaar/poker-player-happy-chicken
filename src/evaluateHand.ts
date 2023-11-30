@@ -25,8 +25,43 @@ export default function evaluateHand(holeCards: Card[] = [], communityCards: Car
         }
     })
 
-    let handStrength: any = getHandStrength(result2);
-    return handStrength;
+    let handStrengthFromCounts: any = getHandStrength(result2);
+    let straightStrength: any = getStraightHandStrength(allCardRanks);
+    if (straightStrength > handStrengthFromCounts)
+        return straightStrength;
+
+    return handStrengthFromCounts;
+}
+
+function getStraightHandStrength(allCardRanks: string[]) {
+
+    let needles: string[][] = [
+        ["A", "2", "3", "4", "5"],
+        ["2", "3", "4", "5", "6"],
+        ["3", "4", "5", "6", "7"],
+        ["4", "5", "6", "7", "8"],
+        ["5", "6", "7", "8", "9"],
+        ["6", "7", "8", "9", "10"],
+        ["7", "8", "9", "10", "J"],
+        ["8", "9", "10", "J", "Q"],
+        ["9", "10", "J", "Q", "K"],
+        ["10", "J", "Q", "K", "A"]
+    ];
+
+
+    let result = HandStrength.HIGH_CARD;
+    needles.forEach(needle => {
+        if (containsAll(needle, allCardRanks))
+            result = HandStrength.STRAIGHT;
+    });
+
+    return result;
+}
+
+function containsAll(needles: string[], haystack: string[]): boolean {
+    return needles.every(value => {
+        return haystack.includes(value);
+    });
 }
 
 function getHandStrength(rankCount: RankCount[]): HandStrength {
