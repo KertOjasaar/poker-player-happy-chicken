@@ -11,7 +11,7 @@ export interface GameState {
   orbits: number;
   in_action: number;
   players: Player[];
-  community_cards?: CommunityCard[];
+  community_cards?: Card[];
 }
 
 export interface Player {
@@ -21,15 +21,11 @@ export interface Player {
   version: string;
   stack: number;
   bet: number;
-  hole_cards?: HoleCard[];
+  hole_cards?: Card[];
 }
 
-export interface HoleCard {
+export interface Card {
   rank: string;
   suit: string;
 }
 
-export interface CommunityCard {
-  rank: string;
-  suit: string;
-}

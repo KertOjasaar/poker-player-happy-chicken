@@ -1,4 +1,4 @@
-import {CommunityCard, HoleCard} from './interfaces';
+import {Card} from './interfaces';
 
 export enum HandStrength {
     HIGH_CARD = 0,
@@ -13,11 +13,11 @@ export enum HandStrength {
     ROYAL_FLUSH = 9,
 }
 
-export default function evaluateHand(holeCards?: HoleCard[], communityCards?: CommunityCard[]): number {
+export default function evaluateHand(holeCards?: Card[], communityCards?: Card[]): number {
 
     if (communityCards?.length == 0 && holeCards?.length == 2) {
-        var first = holeCards[0];
-        var second = holeCards[1];
+        const first = holeCards[0];
+        const second = holeCards[1];
 
         if (first.rank == second.rank)
             return HandStrength.PAIR;
