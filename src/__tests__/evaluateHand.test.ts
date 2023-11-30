@@ -113,4 +113,20 @@ describe('Evaluate hand', () => {
 
     expect(evaluateHand(holeCards, communityCards)).toEqual(HandStrength.STRAIGHT);
   });
+
+  it.skip('should recognise a flush', () => {
+    const holeCards = [
+      { rank: 'J', suit: Suit.CLUBS },
+      { rank: '2', suit: Suit.CLUBS },
+    ];
+    const communityCards = [
+      {rank: '10', suit: Suit.DIAMONDS},
+      {rank: '10', suit: Suit.CLUBS},
+      {rank: '9', suit: Suit.HEARTS},
+      {rank: '9', suit: Suit.CLUBS},
+      {rank: '8', suit: Suit.CLUBS},
+    ];
+
+    expect(evaluateHand(holeCards, communityCards)).toEqual(HandStrength.STRAIGHT);
+  });
 });
