@@ -115,21 +115,12 @@ export function evalPreFlop(gameState: GameState, holeCards: Card[]) {
 export function evalGoodCards(gameState: GameState, betCallBack: (bet: number) => void, handStrength: number, isPreFlop: boolean): number {
     const us = gameState.players.find((player) => player.name === TEAM_NAME);
     const currentBet = gameState.current_buy_in - gameState.players[gameState.in_action].bet;
-    console.log('evalGoodCards', {
-        gameId: gameState.game_id,
-        isPreFlop,
-        holeCards: us?.hole_cards?.map((card: Card) => `${card.rank}${card.suit}`),
-        communityCards: gameState.community_cards?.map((card: Card) => `${card.rank}${card.suit}`),
-        currentBet,
-        handStrength,
-    });
 
     if (isPreFlop) {
         if (handStrength === 100) {
             if (currentBet > 150) {
                 return currentBet;
             } else {
-                console.log('minRaise', {currentBet: currentBet, minraise: gameState.minimum_raise});
                 return currentBet + (gameState.minimum_raise * 3);
             }
         } else if (handStrength === 80 && currentBet < 101) {
