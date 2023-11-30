@@ -10,7 +10,7 @@ export class Player {
       const us: PlayerI | undefined = gameState.players.find((player) => player.name === TEAM_NAME);
       if (us) {
         handStrength = evaluateHand(us.hole_cards, gameState.community_cards);
-        betCallback(us.stack / handStrength);
+        betCallback(handStrength > 0 ? handStrength * 10 : 10);
         return;
       } else {
         console.warn('Our cards don\'t exist');
