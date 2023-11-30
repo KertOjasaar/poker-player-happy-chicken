@@ -117,7 +117,8 @@ export function evalGoodCards(gameState: GameState, betCallBack: (bet: number) =
     const currentBet =  gameState.current_buy_in - gameState.players[gameState.in_action].bet;
     console.log('evalGoodCards', {
         isPreFlop,
-        gameState: JSON.stringify(gameState),
+        holeCards: us?.hole_cards?.map((card: Card) => `${card.rank}${card.suit}`),
+        communityCards: gameState.community_cards?.map((card: Card) => `${card.rank}${card.suit}`),
         currentBet,
         handStrength,
     });
