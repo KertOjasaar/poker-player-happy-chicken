@@ -131,10 +131,9 @@ export function evalGoodCards(gameState: GameState, betCallBack: (bet: number) =
                 console.log('minRaise', {currentBet: currentBet, minraise: gameState.minimum_raise});
                 return currentBet + (gameState.minimum_raise * 3);
             }
-        } else if (
-            (handStrength === 80 && currentBet < 101)
-            || (handStrength > 0 && handStrength < 80 && currentBet < 51)
-        ) {
+        } else if (handStrength === 80 && currentBet < 101) {
+            return currentBet;
+        } else if (handStrength > 0 && handStrength < 80 && currentBet < 51) {
             return currentBet;
         } else {
             return 0;
