@@ -18,6 +18,7 @@
         "src/*.test.ts",
         "src/*.spec.ts",
         "src/__tests__/",
-        "jest.config.ts"
+        "jest.config.ts",
+        "babel.config.js"
     ]
 }

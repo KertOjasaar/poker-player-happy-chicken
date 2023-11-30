@@ -1,13 +1,13 @@
-import {Card, Suit} from '../interfaces';
+import {Suit} from '../interfaces';
 import evaluateHand, {HandStrength} from '../evaluateHand';
 
 describe('Evaluate hand', () => {
   it('should recognise high card', () => {
-    const holeCards: Card[] = [
+    const holeCards = [
       {rank: 'A', suit: Suit.CLUBS},
       {rank: '2', suit: Suit.DIAMONDS},
     ];
-    const communityCards: Card[] = [
+    const communityCards = [
       {rank: 'K', suit: Suit.SPADES},
       {rank: 'J', suit: Suit.SPADES},
       {rank: '7', suit: Suit.HEARTS},
@@ -19,11 +19,11 @@ describe('Evaluate hand', () => {
   });
 
   it('should recognise pair', () => {
-    const holeCards: Card[] = [
+    const holeCards = [
       { rank: 'A', suit: Suit.CLUBS },
       { rank: '2', suit: Suit.DIAMONDS },
     ];
-    const communityCards: Card[] = [
+    const communityCards = [
       {rank: 'A', suit: Suit.DIAMONDS},
       {rank: 'J', suit: Suit.CLUBS},
       {rank: '8', suit: Suit.HEARTS},
@@ -35,11 +35,11 @@ describe('Evaluate hand', () => {
   });
 
   it('should recognise two pairs', () => {
-    const holeCards: Card[] = [
+    const holeCards = [
       { rank: 'A', suit: Suit.CLUBS },
       { rank: '2', suit: Suit.DIAMONDS },
     ];
-    const communityCards: Card[] = [
+    const communityCards = [
       {rank: 'A', suit: Suit.DIAMONDS},
       {rank: 'J', suit: Suit.CLUBS},
       {rank: '8', suit: Suit.HEARTS},
@@ -51,11 +51,11 @@ describe('Evaluate hand', () => {
   });
 
   it('should recognise three of a kind', () => {
-    const holeCards: Card[] = [
+    const holeCards = [
       { rank: 'A', suit: Suit.CLUBS },
       { rank: '2', suit: Suit.DIAMONDS },
     ];
-    const communityCards: Card[] = [
+    const communityCards = [
       {rank: 'A', suit: Suit.DIAMONDS},
       {rank: 'J', suit: Suit.CLUBS},
       {rank: '8', suit: Suit.HEARTS},
@@ -67,11 +67,11 @@ describe('Evaluate hand', () => {
   });
 
   it('should recognise three of a kind', () => {
-    const holeCards: Card[] = [
+    const holeCards = [
       { rank: '2', suit: Suit.DIAMONDS },
       { rank: 'A', suit: Suit.CLUBS },
     ];
-    const communityCards: Card[] = [
+    const communityCards = [
       {rank: 'A', suit: Suit.DIAMONDS},
       {rank: 'J', suit: Suit.CLUBS},
       {rank: '8', suit: Suit.HEARTS},
@@ -83,11 +83,11 @@ describe('Evaluate hand', () => {
   });
 
   it('should recognise a straight A-5', () => {
-    const holeCards: Card[] = [
+    const holeCards = [
       { rank: 'A', suit: Suit.CLUBS },
       { rank: '2', suit: Suit.DIAMONDS },
     ];
-    const communityCards: Card[] = [
+    const communityCards = [
       {rank: '3', suit: Suit.DIAMONDS},
       {rank: 'J', suit: Suit.CLUBS},
       {rank: '5', suit: Suit.HEARTS},
@@ -99,11 +99,11 @@ describe('Evaluate hand', () => {
   });
 
   it('should recognise a straight 7-J', () => {
-    const holeCards: Card[] = [
+    const holeCards = [
       { rank: 'J', suit: Suit.CLUBS },
       { rank: '2', suit: Suit.DIAMONDS },
     ];
-    const communityCards: Card[] = [
+    const communityCards = [
       {rank: '7', suit: Suit.DIAMONDS},
       {rank: '10', suit: Suit.CLUBS},
       {rank: '5', suit: Suit.HEARTS},
