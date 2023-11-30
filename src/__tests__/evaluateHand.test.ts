@@ -114,7 +114,7 @@ describe('Evaluate hand', () => {
     expect(evaluateHand(holeCards, communityCards)).toEqual(HandStrength.STRAIGHT);
   });
 
-  it.skip('should recognise a flush', () => {
+  it('should recognise a flush', () => {
     const holeCards = [
       { rank: 'J', suit: Suit.CLUBS },
       { rank: '2', suit: Suit.CLUBS },

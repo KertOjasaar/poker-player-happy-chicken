@@ -1,4 +1,4 @@
-import {Card} from './interfaces';
+import {Card, Suit} from './interfaces';
 import preflopDecision from './preflopDecision';
 
 export enum HandStrength {
@@ -17,6 +17,7 @@ export enum HandStrength {
 export default function evaluateHand(holeCards: Card[] = [], communityCards: Card[] = []): number {
 
     const allCardRanks = [...holeCards, ...communityCards].map(c => c.rank);
+    const allCardSuites: Suit[] = [...holeCards, ...communityCards].map(c => c.suit);
     let result2: RankCount[] = [];
 
     allCardRanks.forEach(rank => {
@@ -30,7 +31,16 @@ export default function evaluateHand(holeCards: Card[] = [], communityCards: Car
     if (straightStrength > handStrengthFromCounts)
         return straightStrength;
 
+    if (isFlush(allCardSuites)) {
+        return HandStrength.FLUSH;
+    }
+
     return handStrengthFromCounts;
+}
+
+function isFlush(allCardSuites: string[]): boolean {
+    const suites = [Suit.CLUBS, Suit.DIAMONDS, Suit.HEARTS, Suit.SPADES];
+    return suites.some(s => allCardSuites.filter(x => x === s).length >= 5);
 }
 
 function getStraightHandStrength(allCardRanks: string[]) {
