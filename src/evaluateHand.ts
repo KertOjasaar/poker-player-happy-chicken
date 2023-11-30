@@ -21,7 +21,7 @@ export default function evaluateHand(holeCards: Card[] = [], communityCards: Car
         const second = holeCards[1].rank;
 
         // @ts-ignore
-        return preflopDecision[`${first}${second}`];
+        return preflopDecision[`${first}${second}`] || 0;
     }
 
     // const allCardRanks = [...holeCards, ...communityCards].map(c => c.rank);
