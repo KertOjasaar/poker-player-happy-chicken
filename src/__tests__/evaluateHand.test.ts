@@ -122,7 +122,7 @@ describe('Evaluate hand', () => {
     ];
     const communityCards = [
       {rank: '7', suit: Suit.DIAMONDS},
-      {rank: '10', suit: Suit.CLUBS},
+      {rank: 'T', suit: Suit.CLUBS},
       {rank: '5', suit: Suit.HEARTS},
       {rank: '9', suit: Suit.CLUBS},
       {rank: '8', suit: Suit.HEARTS},
@@ -137,8 +137,8 @@ describe('Evaluate hand', () => {
       { rank: '2', suit: Suit.CLUBS },
     ];
     const communityCards = [
-      {rank: '10', suit: Suit.DIAMONDS},
-      {rank: '10', suit: Suit.CLUBS},
+      {rank: 'T', suit: Suit.DIAMONDS},
+      {rank: 'T', suit: Suit.CLUBS},
       {rank: '9', suit: Suit.HEARTS},
       {rank: '9', suit: Suit.CLUBS},
       {rank: '8', suit: Suit.CLUBS},

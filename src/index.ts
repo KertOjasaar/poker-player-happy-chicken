@@ -1,7 +1,7 @@
 import express from 'express';
 import { Player } from './Player';
 
-const VERSION = "v0.5 Wroom Wroom";
+const VERSION = "v0.6 :o";
 
 const app = express();
 const player = new Player();
