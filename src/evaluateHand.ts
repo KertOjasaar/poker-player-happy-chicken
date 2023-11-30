@@ -118,14 +118,10 @@ export function evalGoodCards(gameState: GameState, betCallBack: (bet: number) =
 
     if (isPreFlop) {
         if (handStrength === 100) {
-            if (currentBet > 150) {
-                return currentBet;
-            } else {
-                return currentBet + (gameState.minimum_raise * 3);
-            }
-        } else if (handStrength === 80 && currentBet < 101) {
+            return currentBet + (gameState.minimum_raise * 3);
+        } else if (handStrength === 80) {
             return currentBet;
-        } else if (handStrength > 0 && handStrength < 80 && currentBet < 51) {
+        } else if (handStrength > 0 && handStrength < 80) {
             return currentBet;
         } else {
             return 0;
@@ -134,7 +130,7 @@ export function evalGoodCards(gameState: GameState, betCallBack: (bet: number) =
         if (handStrength === 100) {
             // min raise
             return Math.max(gameState.pot, currentBet + (gameState.minimum_raise * 5));
-        } else if (handStrength > 0 && currentBet < 101) {
+        } else if (handStrength > 0) {
             return currentBet;
         }
         return 0;
