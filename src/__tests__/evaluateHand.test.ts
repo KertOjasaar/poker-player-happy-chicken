@@ -1,4 +1,4 @@
-import {Suit} from '../interfaces';
+import {Suit, Card} from '../interfaces';
 import evaluateHand, {HandStrength} from '../evaluateHand';
 
 describe('Evaluate hand', () => {
@@ -65,6 +65,23 @@ describe('Evaluate hand', () => {
 
     expect(evaluateHand(holeCards, communityCards)).toEqual(HandStrength.THREE_OF_A_KIND);
   });
+
+  it('should recognise three of a kind in community cards', () => {
+    const holeCards:Card[] = [];
+    const communityCards = [
+      {rank: 'A', suit: Suit.DIAMONDS},
+      {rank: 'J', suit: Suit.CLUBS},
+      {rank: '8', suit: Suit.HEARTS},
+      {rank: 'A', suit: Suit.CLUBS},
+      {rank: 'A', suit: Suit.HEARTS},
+    ];
+
+    expect(evaluateHand(holeCards, communityCards)).toEqual(HandStrength.THREE_OF_A_KIND);
+  });
+
+    it('Does not fail without cards', () => {
+        expect(evaluateHand([])).toEqual(HandStrength.HIGH_CARD);
+    });
 
   it('should recognise three of a kind', () => {
     const holeCards = [
