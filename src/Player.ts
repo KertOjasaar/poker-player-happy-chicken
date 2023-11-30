@@ -10,7 +10,7 @@ export class Player {
       const us: PlayerI | undefined = gameState.players.find((player) => player.name === TEAM_NAME);
       if (us) {
         handStrength = evaluateHand(us.hole_cards, gameState.community_cards);
-        betCallback(handStrength > 0 ? handStrength * 10 : 10);
+        betCallback(handStrength > 0 ? this.getCallOrRaiseAmount(gameState, betCallback) : 10);
         return;
       } else {
         console.warn('Our cards don\'t exist');
@@ -20,6 +20,12 @@ export class Player {
     }
 
     betCallback(0);
+  }
+
+  public getCallOrRaiseAmount(gameState: GameState, betCallBack: (bet: number) => void): number {
+    // const currentBet = gameState.current_buy_in;
+    // if (currentBet > )
+    return 10000;
   }
 
   public showdown(gameState: GameState): void {
