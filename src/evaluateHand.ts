@@ -116,6 +116,7 @@ export function evalGoodCards(gameState: GameState, betCallBack: (bet: number) =
     const us = gameState.players.find((player) => player.name === TEAM_NAME);
     const currentBet = gameState.current_buy_in - gameState.players[gameState.in_action].bet;
     console.log('evalGoodCards', {
+        gameId: gameState.game_id,
         isPreFlop,
         holeCards: us?.hole_cards?.map((card: Card) => `${card.rank}${card.suit}`),
         communityCards: gameState.community_cards?.map((card: Card) => `${card.rank}${card.suit}`),
