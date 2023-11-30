@@ -218,6 +218,8 @@ export default function evaluateHand(holeCards?: Card[], communityCards?: Card[]
 
         if (first.rank == second.rank)
             return HandStrength.PAIR;
+        else
+            return HandStrength.HIGH_CARD;
     }
 
 
