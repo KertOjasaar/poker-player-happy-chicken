@@ -128,7 +128,7 @@ export function evalGoodCards(gameState: GameState, betCallBack: (bet: number) =
             if (currentBet > 150) {
                 return currentBet;
             } else {
-                return currentBet + gameState.minimum_raise;
+                return currentBet + (gameState.minimum_raise * 3);
             }
         } else if (
           (handStrength === 80 && currentBet < 101)
@@ -141,7 +141,7 @@ export function evalGoodCards(gameState: GameState, betCallBack: (bet: number) =
     } else {
         if (handStrength === 100) {
             // min raise
-            return currentBet + gameState.minimum_raise;
+            return Math.max(gameState.pot, currentBet + (gameState.minimum_raise * 5));
         } else if (handStrength > 0 && currentBet < 101) {
             return currentBet;
         }
