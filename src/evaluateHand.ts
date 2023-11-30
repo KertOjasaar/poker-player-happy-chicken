@@ -1,4 +1,5 @@
 import {Card} from './interfaces';
+import preflopDecision from './preflopDecision';
 
 export enum HandStrength {
     HIGH_CARD = 0,
@@ -16,26 +17,25 @@ export enum HandStrength {
 export default function evaluateHand(holeCards: Card[] = [], communityCards: Card[] = []): number {
 
     if (communityCards?.length == 0 && holeCards?.length == 2) {
-        const first = holeCards[0];
-        const second = holeCards[1];
+        const first = holeCards[0].rank;
+        const second = holeCards[1].rank;
 
-        if (first.rank == second.rank)
-            return HandStrength.PAIR;
-        else
-            return HandStrength.HIGH_CARD;
+        // @ts-ignore
+        return preflopDecision[`${first}${second}`];
     }
 
-    const allCardRanks = [...holeCards, ...communityCards].map(c => c.rank);
-    let result2: RankCount[] = [];
-
-    allCardRanks.forEach(rank => {
-        if (!result2.find((r => r.rank === rank))) {
-            result2.push({rank, count: allCardRanks.filter(r => r == rank).length});
-        }
-    })
-
-    let handStrength: any = getHandStrength(result2);
-    return handStrength;
+    // const allCardRanks = [...holeCards, ...communityCards].map(c => c.rank);
+    // let result2: RankCount[] = [];
+    //
+    // allCardRanks.forEach(rank => {
+    //     if (!result2.find((r => r.rank === rank))) {
+    //         result2.push({rank, count: allCardRanks.filter(r => r == rank).length});
+    //     }
+    // })
+    //
+    // let handStrength: any = getHandStrength(result2);
+    // return handStrength;
+    return 100;
 }
 
 function getHandStrength(rankCount: RankCount[]): HandStrength {

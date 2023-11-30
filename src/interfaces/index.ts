@@ -10,11 +10,11 @@ export interface GameState {
   dealer: number;
   orbits: number;
   in_action: number;
-  players: Player[];
+  players: PlayerI[];
   community_cards?: Card[];
 }
 
-export interface Player {
+export interface PlayerI {
   id: number;
   name: string;
   status: string;
