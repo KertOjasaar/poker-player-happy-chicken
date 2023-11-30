@@ -1,5 +1,7 @@
-import {Card, Suit} from './interfaces';
+import {Card, GameState, Suit} from './interfaces';
 import preflopDecision from './preflopDecision';
+
+const TEAM_NAME = 'Happy Chicken';
 
 export enum HandStrength {
     HIGH_CARD = 0,
@@ -14,7 +16,7 @@ export enum HandStrength {
     ROYAL_FLUSH = 100,
 }
 
-export default function evaluateHand(holeCards: Card[] = [], communityCards: Card[] = []): number {
+export function evaluateHand(holeCards: Card[] = [], communityCards: Card[] = []): number {
 
     const allCardRanks = [...holeCards, ...communityCards].map(c => c.rank);
     const allCardSuites: Suit[] = [...holeCards, ...communityCards].map(c => c.suit);
@@ -100,4 +102,41 @@ function getHandStrength(rankCount: RankCount[]): HandStrength {
 interface RankCount {
     rank: string;
     count: number;
+}
+
+export function evalPreFlop(gameState: GameState, holeCards: Card[]) {
+    const first = holeCards[0].rank;
+    const second = holeCards[1].rank;
+
+    // @ts-ignore
+    return preflopDecision[`${first}${second}`] || 0;
+}
+
+export function evalGoodCards(gameState: GameState, betCallBack: (bet: number) => void, handStrength: number, isPreFlop: boolean): number {
+    const us = gameState.players.find((player) => player.name === TEAM_NAME);
+    const currentBet =  gameState.current_buy_in - gameState.players[gameState.in_action].bet;
+
+    if (isPreFlop) {
+        if (handStrength === 100) {
+            if (currentBet > 150) {
+                return currentBet;
+            } else {
+                return gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
+            }
+        } else if (
+          handStrength === 80 && currentBet < 101
+          || handStrength > 0 && handStrength < 80 && currentBet < 51
+        ) {
+            return currentBet;
+        } else {
+            return 0;
+        }
+    } else {
+        const ourBet = Math.round((us?.stack || 1000) * handStrength / 1000);
+        if (ourBet > currentBet) {
+            // min raise
+            return gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
+        }
+        return currentBet;
+    }
 }
